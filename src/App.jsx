@@ -20,11 +20,11 @@ const SignUpFrame = lazy(() => import("./pages/SignUpFrame"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 
 // Authentication Pages
-const ForgotPass = lazy(() => import("./pages/ForgotPass"));
+const ForgotPass = lazy(() => import("./pages/control/ForgotPass"));
 const ResetPass = lazy(() => import("./pages/ResetPass"));
 
 // Guardian Pages
-const Guardian = lazy(() => import("./pages/Guardian"));
+const Guardian = lazy(() => import("./pages/control/Guardian"));
 const GuardianShortlisted = () => <div className="p-10 text-center text-xl">Guardian Shortlisted Tutors Page (Placeholder)</div>;
 const RecommendedTutorDetails = () => {
     return <div className="p-10 text-center text-xl">Recommended Tutor Details Page (Placeholder for individual view)</div>;

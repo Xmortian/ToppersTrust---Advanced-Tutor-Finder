@@ -1,48 +1,19 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { supabase } from '../supabase.js'; 
-import { FaSpinner } from 'react-icons/fa'; 
+import { Link } from "react-router-dom";
+import { FaSpinner } from 'react-icons/fa';
 
-const ForgotPass = () => {
-    const [email, setEmail] = useState("");
-    const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false);
-    const [message, setMessage] = useState(""); // State for success/error messages
-
-    const primaryColor = "bg-[#6344cc]";
-    const hoverColor = "hover:bg-[#5238a8]";
-    const focusRingColor = "focus:ring-[#6344cc]";
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setMessage("");
-        if (!email) {
-            setMessage("Please enter your email address.");
-            return;
-        }
-
-        setIsLoading(true);
-
-        try {
-            const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: `${window.location.origin}/update-password`,
-            });
-
-            if (error) {
-                console.error("Password reset error:", error);
-                setMessage(`Error sending reset link: ${error.message}`);
-            } else {
-                setMessage("Password reset link sent! Please check your email (including spam folder).");
-                setEmail("");
-            }
-        } catch (error) {
-            console.error("Unexpected error:", error);
-            setMessage("An unexpected error occurred. Please try again.");
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
+/**
+ * ForgotPassView - Presentation component for password reset
+ */
+const ForgotPassView = ({ 
+    email, 
+    setEmail, 
+    isLoading, 
+    message, 
+    handleSubmit,
+    primaryColor,
+    hoverColor,
+    focusRingColor
+}) => {
     return (
         <div className="w-full min-h-screen relative flex flex-col items-center justify-center p-4 font-roboto text-[#000] overflow-x-hidden">
             <img
@@ -130,4 +101,4 @@ const ForgotPass = () => {
     );
 };
 
-export default ForgotPass;
+export default ForgotPassView;
