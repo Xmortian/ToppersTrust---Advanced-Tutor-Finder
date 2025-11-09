@@ -1,4 +1,4 @@
-// src/controllers/SignUpController.jsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignUpView, { GenderToggle } from '../views/SignUpView';
