@@ -15,13 +15,13 @@ const LoadingFallback = () => (
 
 
 // General Pages
-const LandingPage = lazy(() => import("./pages/LandingPage"));
+const LandingPage = lazy(() => import("./pages/control/LandingPageController"));
 const SignUpFrame = lazy(() => import("./pages/SignUpFrame"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 
 // Authentication Pages
 const ForgotPass = lazy(() => import("./pages/control/ForgotPass"));
-const ResetPass = lazy(() => import("./pages/ResetPass"));
+const ResetPass = lazy(() => import("./pages/control/ResetPassController"));
 
 // Guardian Pages
 const Guardian = lazy(() => import("./pages/control/Guardian"));
