@@ -1,5 +1,5 @@
 
-import { supabase } from '../supabase.js';
+import { supabase } from '../../supabase.js';
 
 /**
  * Validate form fields. Returns { valid: boolean, errors: {...} }
