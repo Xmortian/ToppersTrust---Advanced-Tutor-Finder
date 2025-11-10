@@ -1,59 +1,70 @@
-
+// src/controllers/SignUpController.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignUpView, { GenderToggle } from '../views/SignUpView';
-import { validateSignUpForm, signUpUserWithProfile } from '../models/SignUpModel';
+import SignUpView from '../view/SignUpView';
+import { validateSignUpForm, signUpUserWithProfile } from '../model/SignUpModel';
 
-/**
- * Controller component: manages state, handlers and connects Model <> View
- */
 export default function SignUpController() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: "", phone: "", city: "", password: "", gender: "",
-    email: "", location: "", confirmPassword: "", role: "",
+    name: '', phone: '', city: '', password: '', gender: '',
+    email: '', location: '', confirmPassword: '', role: '',
   });
 
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [signUpMessage, setSignUpMessage] = useState("");
+  const [signUpMessage, setSignUpMessage] = useState('');
 
+  /**
+   * Robust input handler:
+   * - handles text inputs (name, email, etc.)
+   * - handles checkbox with name="terms" to toggle agreedToTerms
+   */
   const handleInputChange = (e) => {
-    // special-case checkbox 'terms' which may pass SyntheticEvent or boolean
-    if (e && e.target && e.target.name === 'terms') {
-      setAgreedToTerms(e.target.checked);
-      setFormErrors(prev => ({ ...prev, terms: null }));
-      setSignUpMessage("");
+    if (!e || !e.target) {
+      console.warn('handleInputChange: unexpected call', e);
       return;
     }
 
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (formErrors[name]) setFormErrors(prev => ({ ...prev, [name]: null }));
-    setSignUpMessage("");
+    const { name, type, value, checked } = e.target;
+
+    // checkbox handling (name === 'terms')
+    if (type === 'checkbox' && name === 'terms') {
+      setAgreedToTerms(checked);
+      if (formErrors.terms) setFormErrors(prev => ({ ...prev, terms: null }));
+      setSignUpMessage('');
+      return;
+    }
+
+    // normal inputs
+    if (name) {
+      setFormData(prev => ({ ...prev, [name]: value }));
+      if (formErrors[name]) setFormErrors(prev => ({ ...prev, [name]: null }));
+      setSignUpMessage('');
+    }
   };
 
   const handleGenderChange = (selectedGender) => {
     setFormData(prev => ({ ...prev, gender: selectedGender }));
     if (formErrors.gender) setFormErrors(prev => ({ ...prev, gender: null }));
-    setSignUpMessage("");
+    setSignUpMessage('');
   };
 
   const handleRoleChange = (selectedRole) => {
     setFormData(prev => ({ ...prev, role: selectedRole }));
     if (formErrors.role) setFormErrors(prev => ({ ...prev, role: null }));
-    setSignUpMessage("");
+    setSignUpMessage('');
   };
 
   const onTermsClick = () => {
-    window.open("/terms-and-conditions", "_blank");
+    window.open('/terms-and-conditions', '_blank');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSignUpMessage("");
+    setSignUpMessage('');
     setFormErrors({});
 
     const { valid, errors } = validateSignUpForm(formData, agreedToTerms);
@@ -70,13 +81,13 @@ export default function SignUpController() {
         setSignUpMessage(`Error: ${result.message}`);
       } else {
         setSignUpMessage(result.message);
-        // redirect after a short delay so user can read message
-        setTimeout(() => navigate("/"), 4000);
+        // give user a moment to read the message, then redirect
+        setTimeout(() => navigate('/'), 4000);
       }
     } catch (err) {
-      setFormErrors(prev => ({ ...prev, submit: "An unexpected error occurred." }));
-      setSignUpMessage("An unexpected error occurred during sign up.");
-      console.error("Controller sign up error:", err);
+      console.error('Controller sign up error:', err);
+      setFormErrors(prev => ({ ...prev, submit: 'An unexpected error occurred.' }));
+      setSignUpMessage('An unexpected error occurred during sign up.');
     } finally {
       setIsLoading(false);
     }
