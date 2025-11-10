@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TutorView from '../views/TutorView';
+import TutorView from '../view/TutorView';
 import {
   getAuthUser,
   fetchTutorProfileByUserId,
@@ -9,7 +9,7 @@ import {
   fetchAcceptedJobsNotifications,
   signOut,
   computeDisplayName,
-} from '../models/TutorModel';
+} from '../model/TutorModel';
 
 const initialTutorState = { name: 'Loading...', tutorId: null, profileImageUrl: '' };
 
