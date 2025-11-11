@@ -36,7 +36,7 @@ const TermsAndConditions = () => {
           Terms and Conditions
         </h2>
         <p className="text-center text-[0.875rem] sm:text-[1rem] text-gray-600 mb-8">
-          Last updated on May 7, 2025
+          Last updated on Nov 11, 2025
         </p>
 
         <div className="prose prose-sm sm:prose-base max-w-none text-left text-gray-700">
