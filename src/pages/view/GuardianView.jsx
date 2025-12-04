@@ -1,10 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaSignOutAlt } from 'react-icons/fa';
+import { 
+    FiLogOut,       // For Sign Out (replacing FaSignOutAlt)
+    FiUser,         // For Profile (replacing FaUser)
+    FiBookmark,     // For Shortlist (replacing FaBookmark)
+    FiPlusSquare,   // For Post Job (replacing FaPlusSquare)
+    FiClipboard,    // For Posted Jobs (replacing FaClipboardList)
+} from 'react-icons/fi';
 
-/**
- * GuardianView - Presentation component for Guardian dashboard
- */
+const navItems = [
+    { name: "Profile", path: "/guardian/profile", bgColor: "bg-gradient-to-br from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500", Icon: FiUser },
+    { name: "Shortlist", path: "/tutor-card", bgColor: "bg-gradient-to-br from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600", Icon: FiBookmark },
+    { name: "Post Job", path: "/guardian/post-job", bgColor: "bg-gradient-to-br from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700", Icon: FiPlusSquare },
+    { name: "Posted Jobs", path: "/guardian/previous-jobs", bgColor: "bg-gradient-to-br from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500", Icon: FiClipboard },
+];
+
 const GuardianView = ({
     guardianData,
     loading,
@@ -55,7 +65,8 @@ const GuardianView = ({
                             onClick={handleSignOut}
                             className="mt-3 text-sm text-gray-300 hover:text-white transition-colors flex items-center ml-auto"
                         >
-                            <FaSignOutAlt className="mr-1" /> Sign Out
+                            {/* Icon used for sign out */}
+                            <FiLogOut className="mr-1" /> Sign Out
                         </button>
                     </div>
                 </div>
@@ -63,17 +74,14 @@ const GuardianView = ({
 
             <section className="relative py-8 px-4 pt-40 sm:pt-44 md:pt-52">
                 <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 relative z-10">
-                    {[
-                        { name: "Profile", path: "/guardian/profile", bgColor: "bg-gradient-to-br from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500" },
-                        { name: "Shortlist", path: "/tutor-card", bgColor: "bg-gradient-to-br from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600" },
-                        { name: "Post Job", path: "/guardian/post-job", bgColor: "bg-gradient-to-br from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700" },
-                        { name: "Posted Jobs", path: "/guardian/previous-jobs", bgColor: "bg-gradient-to-br from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500" },
-                    ].map((button) => (
+                    {navItems.map((button) => (
                         <Link
                             key={button.name}
                             to={button.path}
                             className={`p-10 md:p-12 min-h-[10rem] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center text-center text-gray-800 font-semibold text-xl md:text-2xl ${button.bgColor}`}
                         >
+                            {/* Icon added here */}
+                            <button.Icon className="h-8 w-8 mb-3" />
                             <span>{button.name}</span>
                         </Link>
                     ))}

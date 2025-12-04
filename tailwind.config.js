@@ -3,7 +3,6 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      // --- Your existing 'extend' properties are preserved ---
       colors: {
         "State-Layers-On-Surface-Opacity-12": "rgba(29, 27, 32, 0.12)",
         "Schemes-Surface": "#fef7ff",

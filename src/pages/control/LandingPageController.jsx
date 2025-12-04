@@ -31,6 +31,34 @@ const LandingPageController = () => {
         setShowPassword(!showPassword);
     };
 
+    // Helper function to map the selected role (button label) to the expected Supabase stored role
+    const getExpectedStoredRole = (selectedRole) => {
+        switch (selectedRole) {
+            case "tutor":
+                return "guardian"; // 'I Want a Tutor' maps to 'guardian'
+            case "teacher":
+                return "teacher"; // 'I Want to Teach' maps to 'teacher' (tutor profile)
+            case "media":
+                return "media"; // 'Find a Tutor' maps to 'media'
+            default:
+                return null;
+        }
+    };
+
+    // Helper function to get the dashboard route based on the stored role
+    const getDashboardRoute = (storedRole) => {
+        switch (storedRole) {
+            case "guardian":
+                return "/guardian-dashboard";
+            case "teacher":
+                return "/tutor-dashboard";
+            case "media":
+                return "/media-dashboard"; 
+            default:
+                return "/"; 
+        }
+    };
+
     const handleSignIn = async () => {
         if (!role) {
             setSignInError("Please select your role.");
@@ -56,17 +84,11 @@ const LandingPageController = () => {
             if (data.user) {
                 console.log("Successfully signed in:", data.user);
                 const storedUserRole = data.user.user_metadata?.user_role;
-                const expectedRole = role === "tutor" ? "guardian" : "teacher";
+                const expectedRole = getExpectedStoredRole(role);
 
                 if (storedUserRole === expectedRole) {
-                    if (expectedRole === "guardian") {
-                        navigate("/guardian-dashboard");
-                    } else if (expectedRole === "teacher") {
-                        navigate("/tutor-dashboard");
-                    } else {
-                        console.warn("User has unexpected role:", storedUserRole);
-                        navigate("/");
-                    }
+                    const dashboardRoute = getDashboardRoute(storedUserRole);
+                    navigate(dashboardRoute);
                 } else {
                     setSignInError(`Incorrect role selected. This account is registered as a ${storedUserRole || 'user'}.`);
                     await model.signOut();

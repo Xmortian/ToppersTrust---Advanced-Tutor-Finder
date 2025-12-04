@@ -53,7 +53,7 @@ const LandingPageView = ({
             </header>
 
             <div className="relative z-10 flex flex-col items-center justify-center h-full p-4">
-                <div className="bg-white/80 rounded-xl shadow-2xl p-6 sm:p-8 w-full max-w-xs sm:max-w-md text-center backdrop-blur-md">
+                <div className="bg-white/80 rounded-xl shadow-2xl p-6 sm:p-8 w-full max-w-xs sm:max-w-lg text-center backdrop-blur-md">
                     <h2 className="text-xl sm:text-2xl font-semibold text-cyan-900 mb-1">Welcome!</h2>
                     <p className="text-gray-600 mb-6 text-sm sm:text-base">Sign in to continue</p>
 
@@ -61,6 +61,7 @@ const LandingPageView = ({
                         {[
                             { type: "tutor", label: "I Want a Tutor", subtext: "Guardian" },
                             { type: "teacher", label: "I Want to Teach", subtext: "Teacher" },
+                            { type: "media", label: "I Have a job", subtext: "Media" },
                         ].map((roleOption) => (
                             <div key={roleOption.type} className="flex flex-col items-center">
                                 <button
