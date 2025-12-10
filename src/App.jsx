@@ -34,6 +34,10 @@ const RecommendedTutorDetails = () => {
 const Tutor = lazy(() => import("./pages/control/Tutor"));
 const TutorAcceptedJobs = () => <div className="p-10 text-center text-xl">Tutor Accepted Jobs Page (Placeholder)</div>;
 const TutorEarnings = () => <div className="p-10 text-center text-xl">Tutor Earnings Page (Placeholder)</div>;
+// Media Pages (New)
+const Media = lazy(() => import("./pages/control/Media"));
+const MediaProfile = () => <div className="p-10 text-center text-xl">Media Partner Profile Page (Placeholder)</div>;
+const MediaPostJob = () => <div className="p-10 text-center text-xl">Media Partner Post Job Page (Placeholder)</div>;
 
 function App() {
   const action = useNavigationType();
@@ -68,6 +72,11 @@ function App() {
         ["/tutor/earnings", { title: "Earnings - Tutor - Toppers Trust", description: "View your tutoring earnings." }],
         ["/tutor/profile", { title: "My Profile - Tutor - Toppers Trust", description: "View and manage your tutor profile." }], // Keep placeholder route for now
         ["/tutor/profile/edit", { title: "Edit Profile - Tutor - Toppers Trust", description: "Edit your tutor profile information." }], // Keep placeholder route for now
+        // Media Routes (New)
+        ["/media-dashboard", { title: "Media Partner Dashboard - Toppers Trust", description: "Manage your profile and job posts as a media partner." }],
+        ["/media/profile", { title: "My Profile - Media Partner - Toppers Trust", description: "View and manage your media partner profile." }],
+        ["/media/post-job", { title: "Post a Job - Media Partner - Toppers Trust", description: "Post a new job or advertisement opportunity." }],
+
     ]);
 
     const dynamicRouteMatch = (path) => {
@@ -114,6 +123,12 @@ function App() {
         <Route path="/tutor-dashboard" element={<Tutor />} />
         <Route path="/tutor/accepted-jobs" element={<TutorAcceptedJobs />} />
         <Route path="/tutor/earnings" element={<TutorEarnings />} />
+
+
+        <Route path="/media-dashboard" element={<Media />} />
+        <Route path="/media/profile" element={<MediaProfile />} />
+        <Route path="/media/post-job" element={<MediaPostJob />} />
+
 
       </Routes>
     </Suspense>
