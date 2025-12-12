@@ -1,5 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+// We assume the Supabase client ('supabase') is initialized and available globally 
+// from your project's setup (e.g., in a main index file or context).
+
+// --- ICON Definitions ---
+const BullhornIcon = (props) => (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M10.885 3.012a.75.75 0 0 0-.877-.597C8.4 3.398 6.91 4.254 5.587 5.207c-1.258.852-2.31 1.942-3.222 3.176H1V21h4.5v-2.001c.754-.15 1.51-.278 2.266-.381.796-.104 1.583-.157 2.37-.168 1.411-.02 2.816.026 4.218.152.812.076 1.62.198 2.428.368 1.45.305 2.87.822 4.195 1.543l.888-1.559c-.482-.275-.98-.518-1.48-.737-.5-.219-1.002-.42-1.503-.604-1.282-.472-2.607-.74-3.954-.803-1.42-.066-2.825-.015-4.213.116-.83.076-1.656.208-2.478.384-.823.176-1.636.398-2.433.666V8.163l.894-.894c.83-.83 1.798-1.58 2.873-2.148 1.25-.66 2.652-1.127 4.102-1.298.24-.029.48-.046.72-.054.406-.013.811-.013 1.217.001a.75.75 0 0 0 .72-.614Z" />
+    </svg>
+);
+const BackIcon = (props) => (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path fillRule="evenodd" d="M11.03 14.73a.75.75 0 0 0 .02 1.06l1.25 1.25a.75.75 0 0 0 1.06 0l7.5-7.5a.75.75 0 0 0 0-1.06l-7.5-7.5a.75.75 0 0 0-1.06 0l-1.25 1.25a.75.75 0 0 0-.02 1.06l3.89 3.9H3.75a.75.75 0 0 0 0 1.5h11.17l-3.89 3.9Z" clipRule="evenodd" />
+    </svg>
+);
 import {
     FaBell,           // For Notification Bell
     FaSignOutAlt,     
@@ -18,8 +32,9 @@ const NotificationCloseButton = ({ onClick }) => (
 
 const navItems = [
     { name: "Profile", path: "/tutor/profile", isLink: true, Icon: FaUser, styleClass: "bg-gradient-to-br from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800" },
-    { name: "Dashboard", path: "/tutor-dashboard", isLink: false, Icon: FaTh, styleClass: "bg-gradient-to-br from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-gray-800" },
+    // { name: "Dashboard", path: "/tutor-dashboard", isLink: false, Icon: FaTh, styleClass: "bg-gradient-to-br from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-gray-800" },
     { name: "Job Board", path: "/job-card", isLink: true, Icon: FaBriefcase, styleClass: "bg-gradient-to-br from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800" },
+    { name: "Dues", path: "/tutor/dues", isLink: true, Icon: FaBell, styleClass: "bg-gradient-to-br from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-gray-800"}
 ];
 
 

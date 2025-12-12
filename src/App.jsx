@@ -34,6 +34,8 @@ const RecommendedTutorDetails = () => {
 const Tutor = lazy(() => import("./pages/control/Tutor"));
 const TutorAcceptedJobs = () => <div className="p-10 text-center text-xl">Tutor Accepted Jobs Page (Placeholder)</div>;
 const TutorEarnings = () => <div className="p-10 text-center text-xl">Tutor Earnings Page (Placeholder)</div>;
+
+const DuesController = lazy(() => import('./pages/control/DuesController'));
 // Media Pages (New)
 const Media = lazy(() => import("./pages/control/Media"));
 const MediaProfile = () => <div className="p-10 text-center text-xl">Media Partner Profile Page (Placeholder)</div>;
@@ -72,6 +74,8 @@ function App() {
         ["/tutor/earnings", { title: "Earnings - Tutor - Toppers Trust", description: "View your tutoring earnings." }],
         ["/tutor/profile", { title: "My Profile - Tutor - Toppers Trust", description: "View and manage your tutor profile." }], // Keep placeholder route for now
         ["/tutor/profile/edit", { title: "Edit Profile - Tutor - Toppers Trust", description: "Edit your tutor profile information." }], // Keep placeholder route for now
+
+        
         // Media Routes (New)
         ["/media-dashboard", { title: "Media Partner Dashboard - Toppers Trust", description: "Manage your profile and job posts as a media partner." }],
         ["/media/profile", { title: "My Profile - Media Partner - Toppers Trust", description: "View and manage your media partner profile." }],
@@ -123,6 +127,8 @@ function App() {
         <Route path="/tutor-dashboard" element={<Tutor />} />
         <Route path="/tutor/accepted-jobs" element={<TutorAcceptedJobs />} />
         <Route path="/tutor/earnings" element={<TutorEarnings />} />
+        <Route path="/tutor/dues" element={<DuesController />} />
+
 
 
         <Route path="/media-dashboard" element={<Media />} />
