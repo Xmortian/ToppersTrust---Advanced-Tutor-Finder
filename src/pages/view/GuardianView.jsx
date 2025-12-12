@@ -6,6 +6,8 @@ import {
     FiBookmark,     // For Shortlist (replacing FaBookmark)
     FiPlusSquare,   // For Post Job (replacing FaPlusSquare)
     FiClipboard,    // For Posted Jobs (replacing FaClipboardList)
+    FiSearch,       // New Icon for Search/Browse
+    FiStar          // New Icon for Rating/Emphasis
 } from 'react-icons/fi';
 
 const navItems = [
@@ -94,32 +96,49 @@ const GuardianView = ({
                 </div>
             )}
 
-            <section className="pt-8 pb-12 px-4 mt-16 md:mt-24 lg:mt-32">
+            {/* --- Majestic Recommended Tutors Section --- */}
+            <section className="pt-16 pb-12 px-4 mt-16 md:mt-24 lg:mt-32 bg-gray-900 shadow-inner">
                 <div className="container mx-auto">
-                    <h3 className="text-base font-semibold text-gray-300 mb-3">Recommended Tutors</h3>
-                    {recommendationsLoading && <p className="text-gray-400 text-center py-4">Loading recommendations...</p>}
+                    <div className="flex justify-between items-center mb-10 border-b border-indigo-500/50 pb-3">
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-indigo-400 flex items-center">
+                            <FiStar className="h-6 w-6 mr-3 text-yellow-400" /> Top Recommendations
+                        </h3>
+                        <Link to="/browse-tutors" className="text-sm font-medium text-teal-400 hover:text-teal-300 transition-colors flex items-center">
+                            Browse All <FiSearch className="ml-2 h-4 w-4" />
+                        </Link>
+                    </div>
+
+                    {recommendationsLoading && <p className="text-gray-400 text-center py-10">Loading elite tutors...</p>}
                     {!recommendationsLoading && recommendationsError && (
-                        <p className="text-red-400 text-center py-4">Error: {recommendationsError}</p>
+                        <p className="text-red-400 text-center py-10 bg-red-900/20 rounded-xl">Error loading recommendations: {recommendationsError}</p>
                     )}
                     {!recommendationsLoading && !recommendationsError && recommendedTutors.length === 0 && (
-                        <p className="text-gray-400 text-center py-4">No recommended tutors available at the moment.</p>
+                        <p className="text-gray-400 text-center py-10 bg-gray-700/30 rounded-xl">No recommended tutors available. Try posting a job!</p>
                     )}
                     {!recommendationsLoading && !recommendationsError && recommendedTutors.length > 0 && (
-                        <div className="max-w-4xl mx-auto px-2">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+                        <div className="max-w-6xl mx-auto">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                                 {recommendedTutors.map((tutor) => (
                                     <Link
                                         key={tutor.id}
                                         to={`/browse-tutors`}
-                                        className="block bg-white p-2 rounded-md shadow hover:shadow-md transition-transform transform hover:scale-105 text-center group"
+                                        className="group block bg-gray-800/80 p-3 rounded-xl shadow-xl border border-gray-700/50 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-gray-700/90"
                                     >
-                                        <img
-                                            src={tutor.imageUrl}
-                                            alt={tutor.name}
-                                            onError={(e) => { e.target.onerror = null; e.target.src = tutorImageFallback(); }}
-                                            className="w-full h-24 object-cover object-top rounded-sm mb-2"
-                                        />
-                                        <h4 className="text-sm font-medium text-gray-600 group-hover:text-blue-600 truncate px-1">{tutor.name}</h4>
+                                        <div className="relative w-full h-32 mb-3 overflow-hidden rounded-lg shadow-md">
+                                            <img
+                                                src={tutor.imageUrl}
+                                                alt={tutor.name}
+                                                onError={(e) => { e.target.onerror = null; e.target.src = tutorImageFallback(); }}
+                                                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                            {/* Optional Rating/Badge */}
+                                            <div className="absolute top-2 right-2 bg-yellow-500 text-gray-900 text-xs font-bold px-2 py-0.5 rounded-full shadow-md flex items-center">
+                                                <FiStar className="h-3 w-3 mr-1" /> Top Tutor
+                                            </div>
+                                        </div>
+                                        
+                                        <h4 className="text-sm font-bold text-gray-100 group-hover:text-teal-400 truncate px-1 transition-colors">{tutor.name}</h4>
+                                        <p className="text-xs text-gray-400 truncate px-1 mt-0.5">{tutor.subject || 'Not specified'}</p>
                                     </Link>
                                 ))}
                             </div>
