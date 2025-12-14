@@ -25,7 +25,10 @@ const ResetPass = lazy(() => import("./pages/control/ResetPassController"));
 
 // Guardian Pages
 const Guardian = lazy(() => import("./pages/control/Guardian"));
-const GuardianShortlisted = () => <div className="p-10 text-center text-xl">Guardian Shortlisted Tutors Page (Placeholder)</div>;
+const PostJob = lazy(() => import("./pages/control/PostJobController"));
+const PreviousJobs = lazy(() => import("./pages/control/PreviousJobController"));
+const ShortList = lazy(() => import("./pages/control/ShortListController"));
+const GuardianShortlisted = lazy(() => import("./pages/control/ShortListController"));
 const RecommendedTutorDetails = () => {
     return <div className="p-10 text-center text-xl">Recommended Tutor Details Page (Placeholder for individual view)</div>;
 };
@@ -64,8 +67,9 @@ function App() {
         ["/guardian-dashboard", { title: "Guardian Dashboard - Toppers Trust", description: "Manage your tutoring needs as a guardian on Toppers Trust." }],
         ["/guardian/shortlisted", { title: "Shortlisted Tutors - Toppers Trust", description: "View your shortlisted tutors." }],
         ["/guardian/profile/edit", { title: "Edit Profile - Guardian - Toppers Trust", description: "Edit your guardian profile information." }], // Keep placeholder route for now
-        ["/guardian/post-job", { title: "Post a Job - Toppers Trust", description: "Post a new tutoring job requirement." }], // Keep placeholder route for now
-        ["/guardian/previous-jobs", { title: "My Posted Jobs - Toppers Trust", description: "View your history of posted jobs." }], // Keep placeholder route for now
+        ["/guardian/post-job", { title: "Post a Job - Toppers Trust", description: "Post a new tutoring job requirement." }],
+        ["/guardian/previous-jobs", { title: "My Posted Jobs - Toppers Trust", description: "View your history of posted jobs." }],
+        ["/guardian/shortlist", { title: "Shortlist - Toppers Trust", description: "Review applicants and appoint tutor." }],
         // Tutor Routes
         ["/tutor-dashboard", { title: "Tutor Dashboard - Toppers Trust", description: "Manage your tutoring services and profile on Toppers Trust." }],
         ["/tutor/accepted-jobs", { title: "Accepted Jobs - Tutor - Toppers Trust", description: "View your accepted tutoring jobs." }],
@@ -113,9 +117,11 @@ function App() {
         <Route path="/forgot-pass" element={<ForgotPass />} />
         <Route path="/update-password" element={<ResetPass />} />
 
-        {/* Guardian Specific Routes */}
+        {/* Guardian Specific Routes */}
         <Route path="/guardian-dashboard" element={<Guardian />} />
-        <Route path="/guardian/shortlisted" element={<GuardianShortlisted />} />
+        <Route path="/guardian/post-job" element={<PostJob />} />
+        <Route path="/guardian/previous-jobs" element={<PreviousJobs />} />
+        <Route path="/guardian/shortlisted" element={<ShortList />} />
         <Route path="/recommended-tutor/:tutorId" element={<RecommendedTutorDetails />} />
 
 
