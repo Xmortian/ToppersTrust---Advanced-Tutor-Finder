@@ -12,7 +12,7 @@ import {
 
 const navItems = [
     { name: "Profile", path: "/guardian/profile", bgColor: "bg-gradient-to-br from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500", Icon: FiUser },
-    { name: "Shortlist", path: "/tutor-card", bgColor: "bg-gradient-to-br from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600", Icon: FiBookmark },
+    { name: "Shortlist", path: "/guardian/shortlisted", bgColor: "bg-gradient-to-br from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600", Icon: FiBookmark },
     { name: "Post Job", path: "/guardian/post-job", bgColor: "bg-gradient-to-br from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700", Icon: FiPlusSquare },
     { name: "Posted Jobs", path: "/guardian/previous-jobs", bgColor: "bg-gradient-to-br from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500", Icon: FiClipboard },
 ];
