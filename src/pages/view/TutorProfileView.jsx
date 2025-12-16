@@ -329,13 +329,10 @@ const TutorProfileView = ({
                         renderProfileLink={renderProfileLink}
                     />
 
-                    {/* Educational Information Section */}
                     <EducationalInfoSection 
                         tutorData={tutorData}
                         sectionHeaderColor={defaultSectionHeaderColor}
                     />
-
-                    {/* Tuition Related Information Section */}
                     <TuitionInfoSection 
                         tutorData={tutorData}
                         sectionHeaderColor={defaultSectionHeaderColor}
