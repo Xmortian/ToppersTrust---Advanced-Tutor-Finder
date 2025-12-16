@@ -29,6 +29,7 @@ const PostJob = lazy(() => import("./pages/control/PostJobController"));
 const PreviousJobs = lazy(() => import("./pages/control/PreviousJobController"));
 const ShortList = lazy(() => import("./pages/control/ShortListController"));
 const GuardianShortlisted = lazy(() => import("./pages/control/ShortListController"));
+const RecommendedTutors = lazy(() => import("./pages/control/RecommendedTutorsController"));
 const RecommendedTutorDetails = () => {
     return <div className="p-10 text-center text-xl">Recommended Tutor Details Page (Placeholder for individual view)</div>;
 };
@@ -41,62 +42,59 @@ const TutorEarnings = () => <div className="p-10 text-center text-xl">Tutor Earn
 const DuesController = lazy(() => import('./pages/control/DuesController'));
 // Media Pages (New)
 const Media = lazy(() => import("./pages/control/Media"));
-const MediaProfile = () => <div className="p-10 text-center text-xl">Media Partner Profile Page (Placeholder)</div>;
+const MediaProfile = lazy(() => import("./pages/control/MediaProfileController"));
+const MediaProfileEdit = lazy(() => import("./pages/control/MediaProfileEditController"));
 const MediaPostJob = () => <div className="p-10 text-center text-xl">Media Partner Post Job Page (Placeholder)</div>;
 
 function App() {
-  const action = useNavigationType();
-  const location = useLocation();
-  const pathname = location.pathname;
+  const action = useNavigationType();
+  const location = useLocation();
+  const pathname = location.pathname;
 
-  useEffect(() => {
-    if (action !== "POP") {
-      window.scrollTo(0, 0);
-    }
-  }, [action, pathname]);
+  useEffect(() => {
+    if (action !== "POP") {
+      window.scrollTo(0, 0);
+    }
+  }, [action, pathname]);
 
-  useEffect(() => {
-    let title = "Toppers Trust"; 
-    let metaDescription = "Connecting students and tutors effectively."; // Default description
+  useEffect(() => {
+    let title = "Toppers Trust"; 
+    let metaDescription = "Connecting students and tutors effectively."; // Default description
 
-    const pageInfo = new Map([
-        ["/", { title: "Toppers Trust | Find Best Tutors in BD", description: "Toppers Trust is the fastest growing tuition finder platform in Bangladesh. Right tutor. Right guidance. Real results — trusted by thousands of toppers nationwide!" }],
-        ["/sign-up-frame", { title: "Sign Up - Toppers Trust", description: "Create your Toppers Trust account as a student, guardian, or tutor." }],
-        ["/terms-and-conditions", { title: "Terms & Conditions - Toppers Trust", description: "Read the terms and conditions for using the Toppers Trust platform." }],
-        ["/forgot-pass", { title: "Forgot Password - Toppers Trust", description: "Reset your Toppers Trust account password." }],
-        ["/update-password", { title: "Reset Password - Toppers Trust", description: "Set a new password for your Toppers Trust account." }],
-        // Guardian Routes
-        ["/guardian-dashboard", { title: "Guardian Dashboard - Toppers Trust", description: "Manage your tutoring needs as a guardian on Toppers Trust." }],
-        ["/guardian/shortlisted", { title: "Shortlisted Tutors - Toppers Trust", description: "View your shortlisted tutors." }],
-        ["/guardian/profile/edit", { title: "Edit Profile - Guardian - Toppers Trust", description: "Edit your guardian profile information." }], // Keep placeholder route for now
+    const pageInfo = new Map([
+        ["/", { title: "Toppers Trust | Find Best Tutors in BD", description: "Toppers Trust is the fastest growing tuition finder platform in Bangladesh. Right tutor. Right guidance. Real results — trusted by thousands of toppers nationwide!" }],
+        ["/sign-up-frame", { title: "Sign Up - Toppers Trust", description: "Create your Toppers Trust account as a student, guardian, or tutor." }],
+        ["/terms-and-conditions", { title: "Terms & Conditions - Toppers Trust", description: "Read the terms and conditions for using the Toppers Trust platform." }],
+        ["/forgot-pass", { title: "Forgot Password - Toppers Trust", description: "Reset your Toppers Trust account password." }],
+        ["/update-password", { title: "Reset Password - Toppers Trust", description: "Set a new password for your Toppers Trust account." }],
+        // Guardian Routes
+        ["/guardian-dashboard", { title: "Guardian Dashboard - Toppers Trust", description: "Manage your tutoring needs as a guardian on Toppers Trust." }],
+        ["/guardian/shortlisted", { title: "Shortlisted Tutors - Toppers Trust", description: "View your shortlisted tutors." }],
+        ["/guardian/profile/edit", { title: "Edit Profile - Guardian - Toppers Trust", description: "Edit your guardian profile information." }],
         ["/guardian/post-job", { title: "Post a Job - Toppers Trust", description: "Post a new tutoring job requirement." }],
         ["/guardian/previous-jobs", { title: "My Posted Jobs - Toppers Trust", description: "View your history of posted jobs." }],
         ["/guardian/shortlist", { title: "Shortlist - Toppers Trust", description: "Review applicants and appoint tutor." }],
-        // Tutor Routes
-        ["/tutor-dashboard", { title: "Tutor Dashboard - Toppers Trust", description: "Manage your tutoring services and profile on Toppers Trust." }],
-        ["/tutor/accepted-jobs", { title: "Accepted Jobs - Tutor - Toppers Trust", description: "View your accepted tutoring jobs." }],
-        ["/tutor/earnings", { title: "Earnings - Tutor - Toppers Trust", description: "View your tutoring earnings." }],
-        ["/tutor/profile", { title: "My Profile - Tutor - Toppers Trust", description: "View and manage your tutor profile." }], // Keep placeholder route for now
-        ["/tutor/profile/edit", { title: "Edit Profile - Tutor - Toppers Trust", description: "Edit your tutor profile information." }], // Keep placeholder route for now
-
-        
+        ["/guardian/recommended-tutors", { title: "Recommended Tutors - Toppers Trust", description: "Browse recommended tutors for your needs." }],
+        ["/browse-tutors", { title: "Browse Tutors - Toppers Trust", description: "Browse all available tutors." }],
+        // Tutor Routes
+        ["/tutor-dashboard", { title: "Tutor Dashboard - Toppers Trust", description: "Manage your tutoring services and profile on Toppers Trust." }],
+        ["/tutor/accepted-jobs", { title: "Accepted Jobs - Tutor - Toppers Trust", description: "View your accepted tutoring jobs." }],
+        ["/tutor/earnings", { title: "Earnings - Tutor - Toppers Trust", description: "View your tutoring earnings." }],
+        ["/tutor/profile", { title: "My Profile - Tutor - Toppers Trust", description: "View and manage your tutor profile." }],
+        ["/tutor/profile/edit", { title: "Edit Profile - Tutor - Toppers Trust", description: "Edit your tutor profile information." }],
         // Media Routes (New)
         ["/media-dashboard", { title: "Media Partner Dashboard - Toppers Trust", description: "Manage your profile and job posts as a media partner." }],
         ["/media/profile", { title: "My Profile - Media Partner - Toppers Trust", description: "View and manage your media partner profile." }],
+        ["/media/profile/edit", { title: "Edit Profile - Media Partner - Toppers Trust", description: "Edit your media partner profile information." }],
         ["/media/post-job", { title: "Post a Job - Media Partner - Toppers Trust", description: "Post a new job or advertisement opportunity." }],
+    ]);
 
-    ]);
+    const dynamicRouteMatch = (path) => {
+        if (path.startsWith("/recommended-tutor/")) return { title: "Recommended Tutor - Toppers Trust", description: "Details of a recommended tutor." };
+        return null;
+    }
 
-    const dynamicRouteMatch = (path) => {
-        if (path.startsWith("/recommended-tutor/")) return { title: "Recommended Tutor - Toppers Trust", description: "Details of a recommended tutor." };
-        return null;
-    }
-
-    const info = pageInfo.get(pathname) || dynamicRouteMatch(pathname);
-    if (info) {
-        title = info.title;
-        metaDescription = info.description;
-    }
+    const info = pageInfo.get(pathname) || dynamicRouteMatch(pathname);
 
     if (document.title !== title) { document.title = title; }
     const metaDescriptionTag = document.querySelector('head > meta[name="description"]');
@@ -126,6 +124,8 @@ function App() {
         <Route path="/guardian/post-job" element={<PostJob />} />
         <Route path="/guardian/previous-jobs" element={<PreviousJobs />} />
         <Route path="/guardian/shortlisted" element={<ShortList />} />
+        <Route path="/guardian/recommended-tutors" element={<RecommendedTutors />} />
+        <Route path="/browse-tutors" element={<RecommendedTutors />} />
         <Route path="/recommended-tutor/:tutorId" element={<RecommendedTutorDetails />} />
 
 
@@ -135,15 +135,14 @@ function App() {
         <Route path="/tutor/earnings" element={<TutorEarnings />} />
         <Route path="/tutor/dues" element={<DuesController />} />
 
-
-
+        {/* Media Specific Routes */}
         <Route path="/media-dashboard" element={<Media />} />
         <Route path="/media/profile" element={<MediaProfile />} />
+        <Route path="/media/profile/edit" element={<MediaProfileEdit />} />
         <Route path="/media/post-job" element={<MediaPostJob />} />
 
-
-      </Routes>
-    </Suspense>
-  );
+      </Routes>
+    </Suspense>
+  );
 }
 export default App;
