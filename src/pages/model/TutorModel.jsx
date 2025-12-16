@@ -2,7 +2,6 @@ import { supabase } from '../../supabase.js';
 
 
 
-
 /**
  * Fetch authenticated user.
  * Returns { user, error }
