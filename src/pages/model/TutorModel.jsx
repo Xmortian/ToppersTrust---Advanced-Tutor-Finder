@@ -1,9 +1,5 @@
 import { supabase } from '../../supabase.js';
 
-// --- SSLCOMMERZ MOCK DATA (Only ID/PASS are real variables, endpoint is informational) ---
-const SSLCOMMERZ_STORE_ID = 'toppe6929f5132dfda';
-const SSLCOMMERZ_STORE_PASS = 'toppe6929f5132dfda@ssl';
-const SSLCOMMERZ_SANDBOX_ENDPOINT = 'https://sandbox.sslcommerz.com/gwprocess/v4/api.php';
 
 
 /**
