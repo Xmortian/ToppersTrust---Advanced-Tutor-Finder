@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, LogOut, X, User, Briefcase, Search, FileText } from 'lucide-react';
+import { Bell, LogOut, X, User, Briefcase, Search, FileText, SearchCheckIcon } from 'lucide-react';
 
 // Helper component for notifications close button
 const NotificationCloseButton = ({ onClick }) => (
@@ -14,7 +14,9 @@ const mediaNavItems = [
     // Updated to use grayscale gradients for a less vibrant look
     { name: "Profile", path: "/media/profile", Icon: User, bgColor: "bg-gradient-to-br from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white" },
     { name: "Post Job", path: "/media/post-job", Icon: FileText, bgColor: "bg-gradient-to-br from-slate-600 to-gray-700 hover:from-slate-500 hover:to-gray-600 text-white" },
+    { name: "From Admins", path: "/media/post-job", Icon: SearchCheckIcon , bgColor: "bg-gradient-to-br from-slate-600 to-gray-700 hover:from-slate-500 hover:to-gray-600 text-white" },
     { name: "Browse Tutors", path: "/media/browse-tutors", Icon: Search, bgColor: "bg-gradient-to-br from-neutral-500 to-slate-600 hover:from-neutral-400 hover:to-slate-500 text-white" },
+
 ];
 
 export default function MediaView(props) {
