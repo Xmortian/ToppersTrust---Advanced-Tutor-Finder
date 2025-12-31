@@ -41,6 +41,7 @@ const RecommendedTutorDetails = () => {
 // Tutor Pages
 const Tutor = lazy(() => import("./pages/control/Tutor"));
 const TutorProfile = lazy(() => import("./pages/control/TutorProfile"));
+const TutorProfileEdit = lazy(() => import("./pages/control/TutorProfileEdit"));
 const TutorAcceptedJobs = () => <div className="p-10 text-center text-xl">Tutor Accepted Jobs Page (Placeholder)</div>;
 const TutorEarnings = () => <div className="p-10 text-center text-xl">Tutor Earnings Page (Placeholder)</div>;
 const JobCardView = lazy(() => import("./pages/view/JobCardView"));
@@ -146,8 +147,7 @@ function App() {
         <Route path="/tutor/accepted-jobs" element={<TutorAcceptedJobs />} />
         <Route path="/tutor/earnings" element={<TutorEarnings />} />
         <Route path="/tutor/dues" element={<DuesController />} />
-        <Route path="/tutor/profile" element={<TutorProfile />} />
-        <Route path="/job-card" element={<JobCardView />} />
+        <Route path="/tutor/profile" element={<TutorProfile />} />        <Route path="/tutor/profile/edit" element={<TutorProfileEdit />} />        <Route path="/job-card" element={<JobCardView />} />
         <Route path="/media-dashboard" element={<Media />} />
         <Route path="/media/profile" element={<MediaProfile />} />
         <Route path="/media/profile/edit" element={<MediaProfileEdit />} />

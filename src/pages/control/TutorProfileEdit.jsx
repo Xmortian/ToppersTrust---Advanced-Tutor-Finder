@@ -1,4 +1,5 @@
 // TutorProfileEditController.js
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,13 +12,14 @@ import {
     prepareDataForSupabase,
     saveProfileToDatabase,
     validateImageFile
-} from './TutorProfileEditModel';
+} from '../model/TutorProfileEditModel';
 import {
     GENDER_OPTIONS,
     CURRICULUM_OPTIONS,
     PLACE_OF_TUTORING_OPTIONS,
     HOW_DID_YOU_KNOW_OPTIONS
-} from './TutorProfileEditViewConfig';
+} from '../model/TutorProfileEditViewConfig';
+import TutorProfileEditView from '../view/TutorProfileEditView';
 
 export const useTutorProfileEditController = () => {
     const navigate = useNavigate();
@@ -256,3 +258,15 @@ export const useTutorProfileEditController = () => {
         howDidYouKnowOptions: HOW_DID_YOU_KNOW_OPTIONS,
     };
 };
+
+// ============================================================================
+// WRAPPER COMPONENT (Default Export)
+// ============================================================================
+
+const TutorProfileEditController = () => {
+    const controller = useTutorProfileEditController();
+    
+    return <TutorProfileEditView {...controller} />;
+};
+
+export default TutorProfileEditController;
