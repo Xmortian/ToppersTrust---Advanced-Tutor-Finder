@@ -81,21 +81,28 @@ const LandingPageController = () => {
                 return;
             }
 
-            if (data.user) {
-                console.log("Successfully signed in:", data.user);
-                const storedUserRole = data.user.user_metadata?.user_role;
-                const expectedRole = getExpectedStoredRole(role);
-
-                if (storedUserRole === expectedRole) {
-                    const dashboardRoute = getDashboardRoute(storedUserRole);
-                    navigate(dashboardRoute);
-                } else {
-                    setSignInError(`Incorrect role selected. This account is registered as a ${storedUserRole || 'user'}.`);
-                    await model.signOut();
-                }
-            } else {
-                setSignInError("Sign in failed. Please try again.");
+           if (data.user) {
+            // CHECK FOR ADMIN STATUS FIRST
+            const isAdmin = await model.checkAdminStatus(email);
+            
+            if (isAdmin) {
+                console.log("Admin detected, redirecting...");
+                navigate("/admin-portal"); // Hidden route
+                return; // Stop further execution
             }
+
+            // Normal Role Logic
+            const storedUserRole = data.user.user_metadata?.user_role;
+            const expectedRole = getExpectedStoredRole(role);
+
+            if (storedUserRole === expectedRole) {
+                const dashboardRoute = getDashboardRoute(storedUserRole);
+                navigate(dashboardRoute);
+            } else {
+                setSignInError(`Incorrect role selected.`);
+                await model.signOut();
+            }
+        }
         } catch (error) {
             setSignInError("An unexpected error occurred. Please try again.");
             console.error("Sign in catch error:", error);
