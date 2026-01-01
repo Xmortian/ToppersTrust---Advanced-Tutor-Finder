@@ -51,6 +51,7 @@ const Media = lazy(() => import("./pages/control/Media"));
 const MediaProfile = lazy(() => import("./pages/control/MediaProfileController"));
 const MediaPostJob = () => <div className="p-10 text-center text-xl">Media Partner Post Job Page (Placeholder)</div>;
 const MediaProfileEdit = lazy(() => import("./pages/control/MediaProfileEditController"));
+const MediaBrowseTutors = lazy(() => import("./pages/view/MediaBrowseTutorView"));
 
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
         ["/media-dashboard", { title: "Media Partner Dashboard - Toppers Trust", description: "Manage your profile and job posts as a media partner." }],
         ["/media/profile", { title: "My Profile - Media Partner - Toppers Trust", description: "View and manage your media partner profile." }],
         ["/media/post-job", { title: "Post a Job - Media Partner - Toppers Trust", description: "Post a new job or advertisement opportunity." }],
+        ["/media/browse-tutors", { title: "Browse Tutors - Media Partner - Toppers Trust", description: "Browse and accept tutors for your media platform." }],
 
     ]);
 
@@ -152,6 +154,7 @@ function App() {
         <Route path="/media/profile" element={<MediaProfile />} />
         <Route path="/media/profile/edit" element={<MediaProfileEdit />} />
         <Route path="/media/post-job" element={<MediaPostJob />} />
+        <Route path="/media/browse-tutors" element={<MediaBrowseTutors />} />
 
 
 
