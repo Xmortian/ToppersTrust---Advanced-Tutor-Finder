@@ -32,6 +32,7 @@ const ShortList = lazy(() => import("./pages/control/ShortListController"));
 const GuardianProfile = lazy(() => import("./pages/control/GuardianProfile")); 
 const GuardianProfileEdit = lazy(() => import("./pages/control/GuardianProfileEdit")); 
 const RecommendedTutors = lazy(() => import("./pages/control/RecommendedTutorsController"));
+const AdminPortal = lazy(() => import("./pages/control/AdminPortal"));
 
 const GuardianShortlisted = lazy(() => import("./pages/control/ShortListController"));
 const RecommendedTutorDetails = () => {
@@ -155,6 +156,8 @@ function App() {
         <Route path="/media/profile/edit" element={<MediaProfileEdit />} />
         <Route path="/media/post-job" element={<MediaPostJob />} />
         <Route path="/media/browse-tutors" element={<MediaBrowseTutors />} />
+          {/* Admin Specific Routes */}
+        <Route path="/admin-portal" element={<AdminPortal />} />
 
 
 

@@ -81,22 +81,13 @@ export async function fetchMediaData(userId) {
 }
 
 /**
- * Fetch notifications for media partner
- * (Mock implementation - replace with real Supabase query when you have a notifications table)
+ * 
+ * 
  * 
  * @param {number} mediaId - The media partner ID
  * @returns {Promise<Array>} Array of notification objects
  */
 export async function fetchMediaNotifications(mediaId) {
-    // TODO: Replace with real Supabase query when you create a notifications table
-    // Example:
-    // const { data, error } = await supabase
-    //     .from('notifications')
-    //     .select('*')
-    //     .eq('media_id', mediaId)
-    //     .order('created_at', { ascending: false });
-    
-    // Mock notifications for now
     await new Promise(resolve => setTimeout(resolve, 200));
 
     return [
@@ -122,10 +113,44 @@ export async function signOut() {
     const { error } = await supabase.auth.signOut();
     return error;
 }
+export async function fetchAdminRecommendations(mediaId) {
+    if (!mediaId) return [];
 
-/**
- * Pick a display name from profile name/email
- */
+    try {
+        const { data, error } = await supabase
+            .from('admin_to_media')
+            .select(`
+                id,
+                created_at,
+                admin_note,
+                tutor_id,
+                tutor_selected,
+                tutor ( name ), 
+                media_to_admin ( job_description, media_id )
+            `)
+  
+            .eq('media_to_admin.media_id', mediaId) 
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        
+        
+        return (data || []).filter(item => item.media_to_admin !== null);
+    } catch (error) {
+        console.error('[MediaModel] Error:', error);
+        return [];
+    }
+}
+export async function updateSelectionStatus(recommendationId, status) {
+    const { data, error } = await supabase
+        .from('admin_to_media')
+        .update({ tutor_selected: status })
+        .eq('id', recommendationId)
+        .select();
+
+    if (error) throw error;
+    return data;
+}
 export function computeDisplayName(userEmail, profileName) {
     if (!profileName || profileName === 'Name Not Set') {
         return userEmail?.split('@')[0] || 'Media Partner';
