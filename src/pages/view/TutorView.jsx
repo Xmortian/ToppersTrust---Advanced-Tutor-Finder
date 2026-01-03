@@ -213,7 +213,7 @@ export default function TutorView(props) {
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         <div className="flex-shrink-0 w-full md:w-1/3 flex justify-center">
                             <img
-                                src={"/src/components/recc tutor.png"}
+                                src={"/src/components/recc-tutor.png"}
                                 alt="Example of a Recommended Tutor profile card highlighted with high priority"
                                 className="rounded-xl shadow-xl border-4 border-teal-400 object-cover"
                             />
