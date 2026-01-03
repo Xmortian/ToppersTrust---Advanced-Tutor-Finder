@@ -15,12 +15,12 @@ const BackIcon = (props) => (
     </svg>
 );
 import {
-    FaBell,           // For Notification Bell
+    FaBell,         
     FaSignOutAlt,     
-    FaBullhorn,       // For Advertise button
+    FaBullhorn,    
     FaTimes,          
-    FaUser,           // For Profile card
-    FaTh,             // For Dashboard card (FaGrip replacement)
+    FaUser,         
+    FaTh,             
     FaBriefcase       
 } from 'react-icons/fa';
 
