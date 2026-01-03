@@ -86,7 +86,18 @@ export const useJobCardController = () => {
 
 // Helper to map DB data to UI needs
 const processJobData = (data) => data.map(job => ({
-    ...job,
+    ...job, // Keeps original fields
+    // Map DB snake_case to UI camelCase
+    postedDate: job.posted_date,
+    daysPerWeek: job.daysperweek,
+    noOfStudents: job.numberofstudents,
+    tutoringTime: job.time, // DB column is 'time'
+    studentGender: job.studentgender,
+    preferredTutor: job.genderpreference,
+    tuitionType: job.tuition_type,
+    paymentBasis: job.paymentbasis === 'M' ? 'Monthly' : job.paymentbasis,
+    
+    // Custom logic
     title: `${job.medium || 'N/A'} tutor for ${job.class || 'N/A'} student`,
     location: job.area || job.location || 'Not Specified',
     subjects: job.subjects ? job.subjects.split(',').map(s => s.trim()) : [],
