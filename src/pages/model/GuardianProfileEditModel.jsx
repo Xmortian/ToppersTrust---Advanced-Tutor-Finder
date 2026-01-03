@@ -117,28 +117,56 @@ export class GuardianProfileModel {
     }
 
     /**
-     * Update guardian profile
+     * Update guardian profile (or create if doesn't exist)
      */
     static async updateProfile(userId, updates) {
         try {
-            console.log("MODEL: Updating profile with:", JSON.stringify(updates, null, 2));
+            console.log("MODEL: Updating/Creating profile with:", JSON.stringify(updates, null, 2));
             
-            const { data: updatedData, error: updateError } = await supabase
+            // First, try to update existing profile
+            const { data: existingProfile, error: fetchError } = await supabase
                 .from('guardian')
-                .update(updates)
-                .eq('user_id', userId) 
-                .select() 
-                .single(); 
-
-            if (updateError) {
-                console.error("MODEL: Update error:", updateError);
-                throw updateError; 
+                .select('id')
+                .eq('user_id', userId)
+                .single();
+            
+            let result;
+            
+            if (existingProfile) {
+                // Profile exists - update it
+                const { data: updatedData, error: updateError } = await supabase
+                    .from('guardian')
+                    .update(updates)
+                    .eq('user_id', userId) 
+                    .select() 
+                    .single();
+                
+                if (updateError) {
+                    console.error("MODEL: Update error:", updateError);
+                    throw updateError; 
+                }
+                
+                result = updatedData;
+            } else {
+                // Profile doesn't exist - create it
+                const { data: insertedData, error: insertError } = await supabase
+                    .from('guardian')
+                    .insert([{ user_id: userId, ...updates }])
+                    .select()
+                    .single();
+                
+                if (insertError) {
+                    console.error("MODEL: Insert error:", insertError);
+                    throw insertError;
+                }
+                
+                result = insertedData;
             }
             
-            console.log("MODEL: Profile updated successfully:", updatedData);
-            return updatedData;
+            console.log("MODEL: Profile saved successfully:", result);
+            return result;
         } catch (error) {
-            console.error("MODEL: Error updating profile:", error);
+            console.error("MODEL: Error saving profile:", error);
             throw error;
         }
     }
@@ -190,6 +218,7 @@ export class GuardianProfileModel {
      */
     static transformToDbUpdates(formData, imagePath) {
         return {
+            name: formData.name || null,
             phone: formData.contactNumber || null,
             gender: formData.gender || null, 
             facebook_profile_link: formData.facebookProfile || null,

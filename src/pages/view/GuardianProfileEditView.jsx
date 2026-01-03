@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaGoogle, FaUsers, FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
-import { GuardianProfileViewController } from '../controllers/GuardianProfileViewController';
+import { GuardianProfileViewController } from '../control/GuardianProfileViewController';
 
 /**
  * Info Card Component

@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import GuardianProfileView from '../view/GuardianProfileView';
-import { initialGuardianDataOnLoad, fetchGuardianProfileData, handleSignOutApi } from '../model/GuardianProfileModel'; 
+// Import Model functions and initial state
+import MediaProfileView from '../view/MediaProfileView.jsx';
+import { initialGuardianDataOnLoad, fetchGuardianProfileData, handleSignOutApi } from '../model/MediaProfileModel.jsx'; 
+// NOTE: Adjust the import path for MediaProfileModel.jsx based on your file structure
 
-const GuardianProfile = () => {
+const MediaProfileController = () => {
   const navigate = useNavigate();
-  const [guardianData, setGuardianData] = useState(initialGuardianDataOnLoad);
+  const [mediaData, setMediaData] = useState(initialGuardianDataOnLoad);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -23,7 +25,7 @@ const GuardianProfile = () => {
         setError(fetchError);
       }
       if (data) {
-        setGuardianData(data);
+        setMediaData(data);
       }
 
       setLoading(false);
@@ -47,21 +49,21 @@ const GuardianProfile = () => {
 
   // Controller function for navigating back (User Action Handler)
   const navigateToDashboard = useCallback(() => {
-    navigate('/guardian-dashboard');
+    navigate('/media-dashboard');
   }, [navigate]);
 
   // --- View Helpers (Data for the View) ---
   const profileImageFallback = "https://placehold.co/200x200/6344cc/FFF?text=" +
-    (guardianData.name && guardianData.name !== "Loading..." ? guardianData.name.split(' ').map(n=>n[0]).join('') : "G");
+    (mediaData.name && mediaData.name !== "Loading..." ? mediaData.name.split(' ').map(n=>n[0]).join('') : "M");
 
   if (loading) {
-    return <div className="flex justify-center items-center min-h-screen text-xl text-gray-100">Loading Guardian Profile...</div>;
+    return <div className="flex justify-center items-center min-h-screen text-xl text-gray-100">Loading Media Profile...</div>;
   }
 
   // Render the View, passing data and handlers as props
   return (
-    <GuardianProfileView
-      guardianData={guardianData}
+    <MediaProfileView
+      guardianData={mediaData}
       error={error}
       handleSignOut={handleSignOut}
       navigateToDashboard={navigateToDashboard}
@@ -70,4 +72,4 @@ const GuardianProfile = () => {
   );
 };
 
-export default GuardianProfile;
+export default MediaProfileController;
